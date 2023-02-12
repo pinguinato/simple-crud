@@ -1,6 +1,8 @@
 package it.gianottoroberto.simplecrud.controller;
 
 
+import it.gianottoroberto.simplecrud.controller.request.rest.CreateUserRequest;
+import it.gianottoroberto.simplecrud.exception.UserBadRequestException;
 import it.gianottoroberto.simplecrud.exception.UserNotFoundException;
 import it.gianottoroberto.simplecrud.service.UserService;
 import it.gianottoroberto.simplecrud.service.dto.UserDTO;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,4 +36,17 @@ public class UserRestController {
         return new ResponseEntity<>(userService.getUserByUserName(userName), HttpStatus.OK);
     }
 
+    @PostMapping(
+            value = "/user",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<UserDTO> createUser(
+            @RequestBody @Valid CreateUserRequest createUserRequest
+    ) throws UserBadRequestException {
+        return new ResponseEntity<>(
+                userService.createUser(createUserRequest.getName(), createUserRequest.getEmail()),
+                HttpStatus.CREATED
+        );
+    }
 }

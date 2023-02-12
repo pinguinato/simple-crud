@@ -2,13 +2,16 @@ package it.gianottoroberto.simplecrud.service.impl;
 
 import it.gianottoroberto.simplecrud.data.entity.UserEntity;
 import it.gianottoroberto.simplecrud.data.repository.UserRepository;
+import it.gianottoroberto.simplecrud.exception.UserBadRequestException;
 import it.gianottoroberto.simplecrud.exception.UserNotFoundException;
 import it.gianottoroberto.simplecrud.service.UserService;
 import it.gianottoroberto.simplecrud.service.dto.UserDTO;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -61,6 +64,34 @@ public class UserServiceImpl implements UserService {
         }
 
         return composeListOfUsersDtoFromUserEntities(entities);
+    }
+
+    @Override
+    public UserDTO createUser(String name, String email) throws UserBadRequestException {
+        UserDTO result = new UserDTO();
+        UserEntity userEntity = new UserEntity();
+
+        if (Objects.nonNull(name) && !name.isEmpty()) {
+            result.setName(name);
+            userEntity.setName(name);
+        } else {
+            throw new UserBadRequestException("Name is null or empty");
+        }
+
+        if (Objects.nonNull(email) && !email.isEmpty()) {
+            result.setEmail(email);
+            userEntity.setEmail(email);
+        } else {
+            throw new UserBadRequestException("Email is null or empty");
+        }
+
+        try {
+            userRepository.save(userEntity);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 

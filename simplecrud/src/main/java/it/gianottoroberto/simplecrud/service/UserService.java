@@ -1,5 +1,6 @@
 package it.gianottoroberto.simplecrud.service;
 
+import it.gianottoroberto.simplecrud.exception.UserBadRequestException;
 import it.gianottoroberto.simplecrud.exception.UserNotFoundException;
 import it.gianottoroberto.simplecrud.service.dto.UserDTO;
 
@@ -19,4 +20,5 @@ public interface UserService {
 
     List<UserDTO> getUserByUserName(String userName);
 
+    UserDTO createUser(String name, String email) throws UserBadRequestException;
 }
