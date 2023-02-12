@@ -17,8 +17,8 @@ public class UserController {
     private UserService userService;
 
     /**
-     * Permette l'inserimento a database di un nuovo user
-     * @param userDTO
+     * Add a new user to the database
+     * @param userDTO userDTO
      * @return html template
      */
     @GetMapping("/signup")
