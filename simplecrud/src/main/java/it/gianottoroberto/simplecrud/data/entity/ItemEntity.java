@@ -7,10 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,6 +23,7 @@ public class ItemEntity {
 
     @Id
     @Column(name = "item_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer itemId;
 
     @Column(name = "item_name", nullable = false)
