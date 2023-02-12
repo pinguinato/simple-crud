@@ -17,5 +17,6 @@ public interface UserService {
 
     UserDTO getUser(Integer userId) throws UserNotFoundException;
 
+    List<UserDTO> getUserByUserName(String userName);
 
 }

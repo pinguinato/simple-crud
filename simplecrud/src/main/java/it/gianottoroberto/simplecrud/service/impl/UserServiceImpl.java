@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         Optional<UserEntity> optionalUserEntity = userRepository.findById(userId);
 
         if (optionalUserEntity.isEmpty()) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException("User id "+userId+" not found.");
         }
 
         UserDTO dto = new UserDTO();
@@ -51,6 +51,18 @@ public class UserServiceImpl implements UserService {
 
         return dto;
     }
+
+    @Override
+    public List<UserDTO> getUserByUserName(String userName) {
+        List<UserEntity> entities = userRepository.findAllByName(userName);
+
+        if (entities.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return composeListOfUsersDtoFromUserEntities(entities);
+    }
+
 
     private List<UserDTO> composeListOfUsersDtoFromUserEntities(List<UserEntity> userEntities) {
         List<UserDTO> list = new ArrayList<>();
@@ -63,6 +75,4 @@ public class UserServiceImpl implements UserService {
 
         return list;
     }
-
-
 }

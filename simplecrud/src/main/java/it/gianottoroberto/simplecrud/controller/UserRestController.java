@@ -1,6 +1,7 @@
 package it.gianottoroberto.simplecrud.controller;
 
 
+import it.gianottoroberto.simplecrud.exception.UserNotFoundException;
 import it.gianottoroberto.simplecrud.service.UserService;
 import it.gianottoroberto.simplecrud.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,13 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDTO> getUser(
-            @PathVariable("userId") Integer userId
-    ) throws Exception {
+    public ResponseEntity<UserDTO> getUser(@PathVariable("userId") Integer userId) throws UserNotFoundException {
         return new ResponseEntity<>(userService.getUser(userId), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "user/search/{userName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UserDTO>> getUserByUserName(@PathVariable("userName") String userName) {
+        return new ResponseEntity<>(userService.getUserByUserName(userName), HttpStatus.OK);
     }
 
 }
