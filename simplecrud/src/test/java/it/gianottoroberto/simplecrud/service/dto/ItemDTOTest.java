@@ -1,12 +1,10 @@
 package it.gianottoroberto.simplecrud.service.dto;
 
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class ItemDTOTest {
+class ItemDTOTest {
 
     @Test
     void getterAndSetterTest(){
