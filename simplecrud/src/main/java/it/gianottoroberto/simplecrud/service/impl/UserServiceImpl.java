@@ -106,4 +106,27 @@ public class UserServiceImpl implements UserService {
 
         return list;
     }
+
+    @Override
+    public void deleteUserById(Integer userId) throws UserNotFoundException {
+
+        UserEntity userEntity = loadUserById(userId);
+
+        userRepository.deleteById(userEntity.getId());
+    }
+
+    private UserEntity loadUserById(Integer userId) throws UserNotFoundException {
+        Optional<UserEntity> optionalUserEntity = userRepository.findById(userId);
+
+        if (optionalUserEntity.isEmpty()) {
+            throw new UserNotFoundException("User of id: " + userId + " not found.");
+        }
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(optionalUserEntity.get().getId());
+        userEntity.setName(optionalUserEntity.get().getName());
+        userEntity.setEmail(optionalUserEntity.get().getEmail());
+
+        return userEntity;
+    }
 }

@@ -21,4 +21,6 @@ public interface UserService {
     List<UserDTO> getUserByUserName(String userName);
 
     UserDTO createUser(String name, String email) throws UserBadRequestException;
+
+    void deleteUserById(Integer userId) throws UserNotFoundException;
 }

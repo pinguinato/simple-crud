@@ -49,4 +49,11 @@ public class UserRestController {
                 HttpStatus.CREATED
         );
     }
+
+    @DeleteMapping(value = "/user/{userId}")
+    public ResponseEntity<Void> deleteUserById(@PathVariable("userId") Integer userId) throws Exception {
+        userService.deleteUserById(userId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
