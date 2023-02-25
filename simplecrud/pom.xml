@@ -71,6 +71,23 @@
 			<version>2.0.2</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>
+
 		<!-- questa dipendenza attiva l'url http://localhost:8080/v3/api-docs/ -->
 		<!-- attiva anche l'url http://localhost:8080/swagger-ui/index.html
 		documentazione qui -> https://www.baeldung.com/spring-rest-openapi-documentation -->
