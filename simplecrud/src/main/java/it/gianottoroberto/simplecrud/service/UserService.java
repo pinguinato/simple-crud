@@ -3,7 +3,6 @@ package it.gianottoroberto.simplecrud.service;
 import it.gianottoroberto.simplecrud.exception.UserBadRequestException;
 import it.gianottoroberto.simplecrud.exception.UserNotFoundException;
 import it.gianottoroberto.simplecrud.service.dto.UserDTO;
-
 import java.util.List;
 
 public interface UserService {
