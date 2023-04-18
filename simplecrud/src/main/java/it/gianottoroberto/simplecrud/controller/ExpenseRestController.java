@@ -42,7 +42,7 @@ public class ExpenseRestController {
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
-    @GetMapping(value = "/expenses/{expenseId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/expenses/{expenseId}/details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ExpenseResponse> getExpense(
             @PathVariable(value = "expenseId") Integer expenseId
     ) {
@@ -56,5 +56,5 @@ public class ExpenseRestController {
 
         return new ResponseEntity<>(test,HttpStatus.OK);
     }
-    
+
 }
