@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping(path = "api/v1/expense-controller")
 public class ExpenseRestController {
 
-    private final static String CURRENCY_EURO = "€";
+    private static final String CURRENCY_EURO = "€";
 
     @GetMapping(value = "/expenses/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ExpenseResponse>> getAllExpenses() {
@@ -41,5 +42,19 @@ public class ExpenseRestController {
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
+    @GetMapping(value = "/expenses/{expenseId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ExpenseResponse> getExpense(
+            @PathVariable(value = "expenseId") Integer expenseId
+    ) {
 
+        ExpenseResponse test = new ExpenseResponse();
+        test.setId(111);
+        test.setTitle("Acquisto scarpe nuove");
+        test.setDescription("Acquisto nuove scarpe della marca Salomon per me.");
+        test.setAmount(178.50);
+        test.setCurrency(CURRENCY_EURO);
+
+        return new ResponseEntity<>(test,HttpStatus.OK);
+    }
+    
 }
