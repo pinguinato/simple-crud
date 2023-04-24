@@ -1,18 +1,20 @@
 package it.gianottoroberto.simplecrud.controller;
 
+import it.gianottoroberto.simplecrud.controller.request.rest.ExpenseRequest;
 import it.gianottoroberto.simplecrud.controller.response.rest.ExpenseResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/expense-controller")
+@Slf4j
 public class ExpenseRestController {
 
     private static final String CURRENCY_EURO = "€";
@@ -55,6 +57,13 @@ public class ExpenseRestController {
         test.setCurrency(CURRENCY_EURO);
 
         return new ResponseEntity<>(test,HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/expenses", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ExpenseResponse> createNewExpense(@RequestBody @Valid ExpenseRequest request) {
+        log.info("Enter: createNewExpense with request:[{}]", request);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }
