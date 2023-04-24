@@ -45,4 +45,6 @@ public class ExpenseEntity {
     @Column(name = "expense_date")
     private LocalDate expenseDate;
 
+    @Column(name = "user_id")
+    private Integer userId;
 }
